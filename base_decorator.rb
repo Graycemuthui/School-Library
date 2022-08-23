@@ -1,6 +1,4 @@
-class Base_Decorator < Nameable
-  attr_accessor :nameable
-
+class Decorator < Nameable
   def initialize(nameable)
     @nameable = nameable
     super()
