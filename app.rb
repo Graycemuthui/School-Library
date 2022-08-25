@@ -82,4 +82,29 @@ class App
       nil
     end
   end
+
+  # create rental
+  def create_rental
+    if @books.size.zero?
+      puts 'No book in the library'
+    elsif @people.size.zero?
+      puts 'No person registered in the library'
+    else
+      puts 'Select a list from the following list by number'
+      @books.each_with_index do |book, index|
+        puts "#{index}) Title: #{book.title}, Author: #{book.author}"
+      end
+      rental_book = gets.chomp.to_i
+      puts 'Select a perspn from the following list by number'
+      @people.each_with_index do |person, index|
+        puts "#{index}) #{person.class} Name: #{person.name} ID:#{person.id} Age:#{person.age}"
+      end
+      rental_person = gets.chomp.to_i
+      print 'Date(YYYY/MM/DD):'
+      date = gets.chomp.to_s
+      rental_details = Rental.new(date, @books[rental_book], @people[rental_person])
+      @rentals.push(rental_details)
+      puts 'Rental created successfully'
+    end
+  end
 end

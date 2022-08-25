@@ -34,7 +34,7 @@ class Main
     when 4
       selected_option.create_book
     when 5
-      puts 'Create a rental.'
+      selected_option.create_rental
     when 6
       puts 'List all rentals for a given person id.'
     when 7
