@@ -30,4 +30,15 @@ class App
       puts "Title: #{singlebook.title}, Author: #{singlebook.author}"
     end
   end
+
+  # List people
+  def list_people
+    if @people.empty?
+      puts 'No person in library'
+      return
+    end
+    @people.each do |person|
+      puts "[#{person.class}], Name:#{person.name}, ID:#{person.id}, Age:#{person.age}"
+    end
+  end
 end
