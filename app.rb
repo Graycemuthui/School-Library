@@ -107,4 +107,23 @@ class App
       puts 'Rental created successfully'
     end
   end
+
+  # List all rentals for a given person id.
+  def list_rental
+    if @rentals.empty?
+      puts 'No rental is registered'
+    else
+      puts 'Select a person from the following list by id'
+      @people.each do |person|
+        puts "ID: #{person.id} Name: #{person.name}"
+      end
+      print 'Enter ID:'
+      id = gets.chomp
+      @rentals.each do |rental|
+        if rental.person.id.to_i == id.to_i
+          puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author} "
+        end
+      end
+    end
+  end
 end
