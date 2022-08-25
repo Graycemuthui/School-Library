@@ -56,7 +56,7 @@ class App
     when 'n'
       student = Student.new(age, name, nil, parent_permission: false)
       @people << student
-      puts 'Student doesnt have parent permission, cant rent books'
+      puts 'Student does not have parent permission'
       student = Student.new(age, nil, name, parent_permission)
     when 'y'
       @people.push(student)
