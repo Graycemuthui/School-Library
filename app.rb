@@ -1,6 +1,8 @@
 require_relative 'book'
 require_relative 'person'
 require_relative 'rental'
+require_relative 'student'
+require_relative 'teacher'
 
 class App
   def initialize
@@ -42,19 +44,29 @@ class App
     end
   end
 
+  # Create student
+  def create_student
+    print 'Age:'
+    age = gets.chomp
+    print 'Name:'
+    name = gets.chomp
+    student = Student.new(age, nil, name)
+    @people.push(student)
+    puts 'Student created successfully'
+  end
+
   # Create person
   def create_person
     puts 'Do you want to create a Student(1) or a Teacher(2). [Input a number]'
     choice = gets.chomp
     case choice
     when '1'
-      puts '1 is a student'
+      create_student
     when '2'
       puts '2 is a teacher'
     else
       puts 'Please enter a valid number 1 or 2'
       nil
     end
-    puts 'Person created successfully'
   end
 end
