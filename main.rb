@@ -28,9 +28,9 @@ class Main
     when 1
       selected_option.list_books
     when 2
-      puts 'List all people.'
+      selected_option.list_people
     when 3
-      puts 'Create a person (teacher or student, not a plain Person).'
+      selected_option.create_person
     when 4
       selected_option.create_book
     when 5

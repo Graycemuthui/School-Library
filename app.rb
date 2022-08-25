@@ -41,4 +41,20 @@ class App
       puts "[#{person.class}], Name:#{person.name}, ID:#{person.id}, Age:#{person.age}"
     end
   end
+
+  # Create person
+  def create_person
+    puts 'Do you want to create a Student(1) or a Teacher(2). [Input a number]'
+    choice = gets.chomp
+    case choice
+    when '1'
+      puts '1 is a student'
+    when '2'
+      puts '2 is a teacher'
+    else
+      puts 'Please enter a valid number 1 or 2'
+      nil
+    end
+    puts 'Person created successfully'
+  end
 end
