@@ -55,6 +55,19 @@ class App
     puts 'Student created successfully'
   end
 
+  # Create teacher
+  def create_teacher
+    print 'Age:'
+    age = gets.chomp
+    print 'Name:'
+    name = gets.chomp
+    print 'Specialization:'
+    specialization = gets.chomp
+    teacher = Teacher.new(age, specialization, name)
+    @people.push(teacher)
+    puts 'Teacher created successfully'
+  end
+
   # Create person
   def create_person
     puts 'Do you want to create a Student(1) or a Teacher(2). [Input a number]'
@@ -63,7 +76,7 @@ class App
     when '1'
       create_student
     when '2'
-      puts '2 is a teacher'
+      create_teacher
     else
       puts 'Please enter a valid number 1 or 2'
       nil
