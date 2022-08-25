@@ -50,9 +50,18 @@ class App
     age = gets.chomp
     print 'Name:'
     name = gets.chomp
-    student = Student.new(age, nil, name)
-    @people.push(student)
-    puts 'Student created successfully'
+    print 'Has parent permission? [Y/N]:'
+    parent_permission = gets.chomp.downcase
+    case parent_permission
+    when 'n'
+      student = Student.new(age, name, nil, parent_permission: false)
+      @people << student
+      puts 'Student doesnt have parent permission, cant rent books'
+      student = Student.new(age, nil, name, parent_permission)
+    when 'y'
+      @people.push(student)
+      puts 'Student created successfully'
+    end
   end
 
   # Create teacher
