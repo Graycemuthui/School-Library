@@ -54,11 +54,11 @@ class App
     parent_permission = gets.chomp.downcase
     case parent_permission
     when 'n'
-      student = Student.new(age, name, nil, parent_permission: false)
-      @people << student
+      student = Student.new(age, nil, name, false)
+      @people.push(student)
       puts 'Student does not have parent permission'
-      student = Student.new(age, nil, name, parent_permission)
     when 'y'
+      student = Student.new(age, nil, name, true)
       @people.push(student)
       puts 'Student created successfully'
     end
@@ -104,7 +104,7 @@ class App
         puts "#{index}) Title: #{book.title}, Author: #{book.author}"
       end
       rental_book = gets.chomp.to_i
-      puts 'Select a perspn from the following list by number'
+      puts 'Select a person from the following list by number'
       @people.each_with_index do |person, index|
         puts "#{index}) #{person.class} Name: #{person.name} ID:#{person.id} Age:#{person.age}"
       end
