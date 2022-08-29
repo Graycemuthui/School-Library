@@ -82,25 +82,33 @@ class App
       puts_message 'Please enter a valid number 1 or 2'
       nil
     end
-  end
+  end 
 
-  # create rental
-  def create_rental
-    if @books.size.zero?
-      puts_message 'No book in the library'
-    elsif @people.size.zero?
-      puts_message 'No person registered in the library'
-    else
-      puts 'Select a list from the following list by number'
+  def get_rental_book
+    puts 'Select a list from the following list by number'
       @books.each_with_index do |book, index|
         puts_message "#{index}) Title: #{book.title}, Author: #{book.author}"
       end
       rental_book = gets.chomp.to_i
-      puts_message 'Select a person from the following list by number'
+  end
+
+  def get_rental_person
+    puts_message 'Select a person from the following list by number'
       @people.each_with_index do |person, index|
         puts_message "#{index}) #{person.class} Name: #{person.name} ID:#{person.id} Age:#{person.age}"
       end
       rental_person = get_user_input().to_i
+  end
+
+  def create_rental 
+    if @books.size.zero?
+      puts_message 'No book in the library'
+    elsif @people.size.zero?
+      puts_message 'No person registered in the library'
+    else      
+      rental_book = get_rental_book
+      rental_person = get_rental_person
+     
       date = get_user_input('Date(YYYY/MM/DD):').to_s  
       rental_details = Rental.new(date, @books[rental_book], @people[rental_person])
       @rentals.push(rental_details)
