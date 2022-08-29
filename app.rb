@@ -11,12 +11,15 @@ class App
     @rentals = []
   end
 
+  def get_user_input(key)
+    print key
+    input = gets.chomp
+  end
+
   # Create a book
   def create_book
-    print 'Title:'
-    title = gets.chomp
-    print 'Author:'
-    author = gets.chomp
+    title = get_user_input 'Title:'
+    author = get_user_input 'Author:'
     book = Book.new(title, author)
     @books.push(book)
     puts 'Book created successfully'

@@ -1,7 +1,6 @@
 require './app'
-require_relative 'options'
 
-class Main  
+class Main
   puts 'Welcome to School Library App'
   puts "\n"
 
@@ -22,16 +21,28 @@ class Main
     Integer(gets.chomp)
   end
 
-  app = App.new
+  selected_option = App.new
 
-  def exit_app
-    exit
-  end
-
-  methods = [app.list_books, app.list_people, app.create_person, app.create_book, app.create_rental, app.list_rental, exit_app]
-
-  loop do    
-    Options.callMethod(option, methods)    
+  loop do
+    case option
+    when 1
+      selected_option.list_books
+    when 2
+      selected_option.list_people
+    when 3
+      selected_option.create_person
+    when 4
+      selected_option.create_book
+    when 5
+      selected_option.create_rental
+    when 6
+      selected_option.list_rental
+    when 7
+      puts 'Thank you for using this app'
+      exit
+    else
+      puts 'Invalid Option. Enter number between 1 an 7'
+    end
   end
 end
 
