@@ -54,6 +54,12 @@ See the [open issues](#) for a full list of proposed features (and known issues)
 - Twitter: [@Grayce_Muthui](https://twitter.com/Grayce_Muthui)
 - LinkedIn: [@Grayce Muthui](http://www.linkedin.com/in/grayce-muthui-a17294226)
 
+### Authors
+
+| 👤 Name         | Github                                   | Twitter                                              | LinkedIn                                                       |
+| --------------- | ---------------------------------------- | ---------------------------------------------------- | -------------------------------------------------------------- |
+| Robertson Akpan | [@bobb-rob](https://github.com/bobb-rob) | [@\_\_\_Robertson](https://twitter.com/___Robertson) | [@RobertsonAkpan](https://www.linkedin.com/in/robertsonakpan/) |
+
 ## 🤝 Contributing
 
 - Contributions, issues, and feature requests are welcome!

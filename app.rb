@@ -85,11 +85,11 @@ class App
   end 
 
   def get_rental_book
-    puts 'Select a list from the following list by number'
+    puts_message 'Select a list from the following list by number'
       @books.each_with_index do |book, index|
         puts_message "#{index}) Title: #{book.title}, Author: #{book.author}"
       end
-      rental_book = gets.chomp.to_i
+      rental_book = get_user_input.to_i
   end
 
   def get_rental_person
@@ -128,7 +128,7 @@ class App
       id = get_user_input 'Enter ID:'
       @rentals.each do |rental|
         if rental.person.id.to_i == id.to_i
-          puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author} "
+          puts_message "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author} "
         end
       end
     end
