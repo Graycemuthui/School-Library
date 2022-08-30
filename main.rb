@@ -21,22 +21,22 @@ class Main
     Integer(gets.chomp)
   end
 
-  selected_option = App.new
+  app = App.new
 
   loop do
     case option
     when 1
-      selected_option.list_books
+      app.list_books
     when 2
-      selected_option.list_people
+      app.list_people
     when 3
-      selected_option.create_person
+      app.create_person
     when 4
-      selected_option.create_book
+      app.create_book
     when 5
-      selected_option.create_rental
+      app.create_rental
     when 6
-      selected_option.list_rental
+      app.list_rental
     when 7
       puts 'Thank you for using this app'
       exit

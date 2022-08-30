@@ -13,126 +13,146 @@ class App
 
   # Create a book
   def create_book
-    print 'Title:'
-    title = gets.chomp
-    print 'Author:'
-    author = gets.chomp
-    book = Book.new(title, author)
-    @books.push(book)
-    puts 'Book created successfully'
+    title = get_user_input 'Title:'
+    author = get_user_input 'Author:'
+    create_object(Book, @books, title, author)
+    puts_message 'Book created successfully'
   end
 
   # List all books
   def list_books
     if @books.empty?
-      puts 'No books in the library'
+      puts_message 'No books in the library'
       return
     end
     @books.each do |singlebook|
-      puts "Title: #{singlebook.title}, Author: #{singlebook.author}"
+      puts_message "Title: #{singlebook.title}, Author: #{singlebook.author}"
     end
   end
 
   # List people
   def list_people
     if @people.empty?
-      puts 'No person in library'
+      puts_message 'No person in library'
       return
     end
     @people.each do |person|
-      puts "[#{person.class}], Name:#{person.name}, ID:#{person.id}, Age:#{person.age}"
+      puts_message "[#{person.class}], Name:#{person.name}, ID:#{person.id}, Age:#{person.age}"
     end
-  end
-
-  # Create student
-  def create_student
-    print 'Age:'
-    age = gets.chomp
-    print 'Name:'
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]:'
-    parent_permission = gets.chomp.downcase
-    case parent_permission
-    when 'n'
-      student = Student.new(age, nil, name, false)
-      @people.push(student)
-      puts 'Student does not have parent permission'
-    when 'y'
-      student = Student.new(age, nil, name, true)
-      @people.push(student)
-      puts 'Student created successfully'
-    end
-  end
-
-  # Create teacher
-  def create_teacher
-    print 'Age:'
-    age = gets.chomp
-    print 'Name:'
-    name = gets.chomp
-    print 'Specialization:'
-    specialization = gets.chomp
-    teacher = Teacher.new(age, specialization, name)
-    @people.push(teacher)
-    puts 'Teacher created successfully'
   end
 
   # Create person
   def create_person
-    puts 'Do you want to create a Student(1) or a Teacher(2). [Input a number]'
-    choice = gets.chomp
-    case choice
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    else
-      puts 'Please enter a valid number 1 or 2'
-      nil
+    puts_message 'Do you want to create a Student(1) or a Teacher(2). [Input a number]'
+    get_person = lambda do
+      choice = get_user_input
+      case choice
+      when '1'
+        create_student
+      when '2'
+        create_teacher
+      else
+        puts_message 'Please enter a valid number 1 or 2'
+        get_person.call
+      end
     end
+    get_person.call
   end
 
-  # create rental
   def create_rental
     if @books.size.zero?
-      puts 'No book in the library'
+      puts_message 'No book in the library'
     elsif @people.size.zero?
-      puts 'No person registered in the library'
+      puts_message 'No person registered in the library'
     else
-      puts 'Select a list from the following list by number'
-      @books.each_with_index do |book, index|
-        puts "#{index}) Title: #{book.title}, Author: #{book.author}"
-      end
-      rental_book = gets.chomp.to_i
-      puts 'Select a person from the following list by number'
-      @people.each_with_index do |person, index|
-        puts "#{index}) #{person.class} Name: #{person.name} ID:#{person.id} Age:#{person.age}"
-      end
-      rental_person = gets.chomp.to_i
-      print 'Date(YYYY/MM/DD):'
-      date = gets.chomp.to_s
-      rental_details = Rental.new(date, @books[rental_book], @people[rental_person])
-      @rentals.push(rental_details)
-      puts 'Rental created successfully'
+      rental_book = find_rental_book
+      rental_person = find_rental_person
+      date = get_user_input('Date(YYYY/MM/DD):').to_s
+      create_object(Rental, @rentals, date, @books[rental_book], @people[rental_person])
+      puts_message 'Rental created successfully'
     end
   end
 
   # List all rentals for a given person id.
   def list_rental
     if @rentals.empty?
-      puts 'No rental is registered'
+      puts_message 'No rental is registered'
     else
-      puts 'Select a person from the following list by id'
+      puts_message 'Select a person from the following list by id'
       @people.each do |person|
-        puts "ID: #{person.id} Name: #{person.name}"
+        puts_message "ID: #{person.id} Name: #{person.name}"
       end
-      print 'Enter ID:'
-      id = gets.chomp
+      id = get_user_input 'Enter ID:'
       @rentals.each do |rental|
         if rental.person.id.to_i == id.to_i
-          puts "Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author} "
+          puts_message "[Rental] Date: #{rental.date}, Book \"#{rental.book.title}\" by #{rental.book.author} "
         end
       end
     end
+  end
+
+  private
+
+  def get_user_input(key = '')
+    puts "\n"
+    print key
+    gets.chomp
+  end
+
+  def puts_message(message)
+    puts "\n"
+    puts message
+    puts "\n"
+  end
+
+  def find_rental_book
+    puts_message 'Select a list from the following list by number'
+    @books.each_with_index do |book, index|
+      puts_message "#{index}) Title: #{book.title}, Author: #{book.author}"
+    end
+    get_user_input.to_i
+  end
+
+  def find_rental_person
+    puts_message 'Select a person from the following list by number'
+    @people.each_with_index do |person, index|
+      puts_message "#{index}) #{person.class} Name: #{person.name} ID:#{person.id} Age:#{person.age}"
+    end
+    get_user_input.to_i
+  end
+
+  def create_object(class_name, store, *args)
+    object = class_name.new(*args)
+    store.push(object)
+  end
+
+  # Create student
+  def create_student
+    age = get_user_input 'Age:'
+    name = get_user_input 'Name:'
+    get_permission = lambda do
+      parent_permission = get_user_input 'Has parent permission? [Y/N]:'
+      case parent_permission
+      when 'n'
+        create_object(Student, @people, age, nil, name, false)
+        puts_message 'Student does not have parent permission'
+      when 'y'
+        create_object(Student, @people, age, nil, name, true)
+        puts_message 'Student created successfully'
+      else
+        puts_message 'Please enter "y" for Yes or "n" for No'
+        get_permission.call
+      end
+    end
+    get_permission.call
+  end
+
+  # Create teacher
+  def create_teacher
+    age = get_user_input 'Age: '
+    name = get_user_input 'Name:'
+    specialization = get_user_input 'Specialization:'
+    create_object(Teacher, @people, age, specialization, name)
+    puts_message 'Teacher created successfully'
   end
 end
