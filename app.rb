@@ -3,13 +3,16 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'storage'
 
 class App
   def initialize
-    @books = []
+    @books = read_books
     @people = []
     @rentals = []
   end
+
+  include LocalStorage
 
   # Create a book
   def create_book
@@ -124,6 +127,7 @@ class App
   def create_object(class_name, store, *args)
     object = class_name.new(*args)
     store.push(object)
+    writeData(object)
   end
 
   # Create student
