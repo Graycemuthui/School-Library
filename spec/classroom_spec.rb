@@ -15,7 +15,7 @@ describe Classroom do
 
     describe '#student' do
       it 'should return the correct student' do
-        @classroom.student.should eq []
+        @classroom.student.should eq ['student']
       end
     end
   end
