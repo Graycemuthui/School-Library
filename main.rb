@@ -39,6 +39,7 @@ class Main
       app.list_rental
     when 7
       puts 'Thank you for using this app'
+      app.save_all_data
       exit
     else
       puts 'Invalid Option. Enter number between 1 an 7'
@@ -47,6 +48,6 @@ class Main
 end
 
 def main_call
-  Main.new
+  Main.new  
 end
 main_call
