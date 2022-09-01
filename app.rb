@@ -7,7 +7,7 @@ require_relative 'storage'
 
 class App
   def initialize
-    @books = read_books
+    @books = []
     @people = []
     @rentals = []
   end
@@ -127,7 +127,6 @@ class App
   def create_object(class_name, store, *args)
     object = class_name.new(*args)
     store.push(object)
-    writeData(object)
   end
 
   # Create student
