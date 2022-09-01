@@ -22,6 +22,7 @@ class Main
   end
 
   app = App.new
+  app.read_all_data
 
   loop do
     case option
@@ -39,6 +40,7 @@ class Main
       app.list_rental
     when 7
       puts 'Thank you for using this app'
+      app.save_all_data
       exit
     else
       puts 'Invalid Option. Enter number between 1 an 7'
