@@ -23,7 +23,7 @@ class Main
 
   app = App.new
   app.read_all_data
-  
+
   loop do
     case option
     when 1
@@ -49,6 +49,6 @@ class Main
 end
 
 def main_call
-  Main.new  
+  Main.new
 end
 main_call
